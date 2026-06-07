@@ -28,6 +28,12 @@ const TaskCard = ({task,onDelete, onToggle, onEdit}) => {
     }
   };
 
+   const getBadge = () => {
+    if (task.status === 'completed') return 'success';
+    if (task.status === 'incomplete') return 'danger';
+    return 'warning';
+  };
+
   return (
     <div>TaskCard</div>
   )
