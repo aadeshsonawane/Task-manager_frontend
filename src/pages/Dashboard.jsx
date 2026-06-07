@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/authContext';
 import Navbar from '../components/Navbar';
 import TaskCard from '../components/TaskCard';
-import EditTaskModal from '../components/EditTaskModal';
+import EditTask from '../components/EditTask';
 
 const Dashboard = () => {
   const { token } = useAuth();
@@ -68,12 +68,12 @@ const Dashboard = () => {
     setTasks(tasks.map(t => t._id === updatedTask._id ? updatedTask : t));
   };
 
-  // Search + Filter Logic
+  // Search,Filter
   const filteredTasks = tasks
     .filter(t => t.title.toLowerCase().includes(search.toLowerCase()))
     .filter(t => statusFilter === 'all' ? true : t.status === statusFilter);
 
-  // Pagination Logic
+  // Pagination
   const totalPages = Math.ceil(filteredTasks.length / tasksPerPage);
   const paginatedTasks = filteredTasks.slice(
     (currentPage - 1) * tasksPerPage,
@@ -85,7 +85,6 @@ const Dashboard = () => {
       <Navbar />
       <div className="container mt-4">
 
-        {/* Create Task Form */}
         <div className="card shadow-sm p-4 mb-4">
           <h5 className="mb-3">Add New Task</h5>
           <form onSubmit={handleCreate}>
@@ -118,7 +117,6 @@ const Dashboard = () => {
           </form>
         </div>
 
-        {/* Search + Filter */}
         <div className="row mb-3 g-2">
           <div className="col-md-8">
             <input
@@ -149,7 +147,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Tasks List */}
         {loading ? (
           <div className="text-center">
             <div className="spinner-border text-primary"></div>
@@ -168,7 +165,6 @@ const Dashboard = () => {
           ))
         )}
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="d-flex justify-content-center mt-4">
             <ul className="pagination">
@@ -195,9 +191,8 @@ const Dashboard = () => {
 
       </div>
 
-      {/* Edit Modal */}
       {selectedTask && (
-        <EditTaskModal
+        <EditTask
           task={selectedTask}
           onUpdate={handleUpdate}
           onClose={() => setSelectedTask(null)}
