@@ -71,7 +71,7 @@ const Register = () => {
               name="password"
               className="form-control"
               placeholder="Enter password"
-              value={formData.email}
+              value={FormData.password}
               onChange={handleChange}
               required
             />
