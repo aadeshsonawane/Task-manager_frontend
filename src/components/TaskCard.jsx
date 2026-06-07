@@ -17,6 +17,17 @@ const TaskCard = ({task,onDelete, onToggle, onEdit}) => {
     }
   };
 
+    const handleToggle = async () => {
+    try {
+      const res = await axios.patch(`http://localhost:5002/api/tasks/${task._id}/toggle`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      onToggle(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>TaskCard</div>
   )
