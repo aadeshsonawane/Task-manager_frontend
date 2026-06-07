@@ -21,7 +21,7 @@ const Register = () => {
     setLoading(true);
     setError('');
     try {
-      await axios.post('http://localhost:5002/api/auth/register', formData);
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, formData);
       navigate('/login');
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong');

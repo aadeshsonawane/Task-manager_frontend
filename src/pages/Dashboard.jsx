@@ -24,7 +24,7 @@ const Dashboard = () => {
   const fetchTasks = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:5002/api/tasks', {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/tasks`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTasks(res.data);
@@ -43,7 +43,7 @@ const Dashboard = () => {
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5002/api/tasks', formData, {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/tasks`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTasks([res.data, ...tasks]);

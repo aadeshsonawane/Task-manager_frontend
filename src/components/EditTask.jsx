@@ -30,7 +30,7 @@ const EditTask = ({ task, onUpdate, onClose }) => {
     setError('');
     try {
       const res = await axios.put(
-        `http://localhost:5002/api/tasks/${task._id}`,
+        `${import.meta.env.VITE_API_URL}/tasks/${task._id}`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
